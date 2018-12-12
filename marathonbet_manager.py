@@ -16,9 +16,7 @@ class Marathonbet:
         self._password = password
 
     def get_all_live_football_match_url(self):
-        '''
-        获取所有足球直播url
-        '''
+        ''' 获取所有足球直播url '''
         global _COOKIE
         url = 'https://www.marathonbet.com/en/live/popular.htm'
         other_headers = {
@@ -59,9 +57,7 @@ class Marathonbet:
         return ''
 
     def get_all_data(self):
-        '''
-        获取所有的盘口的数据
-        '''
+        ''' 获取所有的盘口的数据 '''
         global _COOKIE
         if not _COOKIE:
             _COOKIE = self.get_login_cookie()
@@ -73,9 +69,7 @@ class Marathonbet:
         print all_live_url_list 
 
     def get_one_match_handicap_data(self, live_url):
-        '''
-        获取一场比赛所有的盘口数据
-        '''
+        ''' 获取一场比赛所有的盘口数据 '''
         global _COOKIE
         if not live_url:
             return ''
@@ -169,9 +163,7 @@ class Marathonbet:
             return ''
 
     def make_headers(self, other_headers):
-        '''
-        制作头信息
-        '''
+        ''' 制作头信息 '''
         headers = {
             'user-agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36',
             'accept-encoding': 'gzip, deflate, br',
@@ -186,9 +178,7 @@ class Marathonbet:
     投注
     '''
     def addBet(self, referer, ch):
-        '''
-        打开付钱页面 
-        '''
+        ''' 打开付钱页面 '''
         global _COOKIE
         url = 'https://www.marathonbet.com/en/betslip/add2.htm'
         other_headers = {
@@ -208,9 +198,7 @@ class Marathonbet:
         response = self.is_success_request('post', url, headers, formData=formData, cookies=cookies)
 
     def updateChoice(self, referer, u): 
-        '''
-        刷新赔率
-        '''
+        ''' 刷新赔率 '''
         global _COOKIE
         url = 'https://www.marathonbet.com/en/betslip/updatechoices2.htm'
         other_headers = {
@@ -229,9 +217,7 @@ class Marathonbet:
         return response.content
 
     def saveUpdate(self, referer):
-        '''
-        保留更新
-        '''
+        ''' 保留更新 '''
         global _COOKIE
         url = 'https://www.marathonbet.com/en/betslip/applyactualchoices2.htm'
         other_headers = {
@@ -244,9 +230,7 @@ class Marathonbet:
         response = self.is_success_request('post', url, headers=headers, cookies=_COOKIE)
 
     def placeBet(self, referer, u, stake):
-        '''
-        付钱
-        '''
+        ''' 付钱 '''
         global _COOKIE
         url = 'https://www.marathonbet.com/en/betslip/placebet2.htm'
         other_headers = {
@@ -267,9 +251,7 @@ class Marathonbet:
         response = self.is_success_request('post', url, headers=headers, formData=formData, cookies=_COOKIE)
 
     def placeTicket(self, referer, ticketId):
-        '''
-        投注结果
-        '''
+        ''' 投注结果 '''
         global _COOKIE
         url = 'https://www.marathonbet.com/en/betslip/placeticket2.htm'
         other_headers = {
@@ -301,9 +283,7 @@ class Marathonbet:
     用户登录
     '''
     def get_start_cookie(self):
-        '''
-        获取起始cookie
-        '''
+        ''' 获取起始cookie '''
         url = 'https://www.marathonbet.com/en/live/popular'
         other_headers = {
             'upgrade-insecure-requests': '1'
@@ -317,9 +297,7 @@ class Marathonbet:
             return ''
 
     def get_login_cookie(self):
-        '''
-        获取登录的cookie
-        '''
+        ''' 获取登录的cookie '''
         try:
             with open(_PATH_COOKIE, 'r') as f:
                 login_cookie_str = f.read()
@@ -337,9 +315,7 @@ class Marathonbet:
             return self.login()
 
     def login(self):
-        '''
-        登录生成cookie
-        '''
+        ''' 登录生成cookie '''
         url = 'https://www.marathonbet.com/en/login.htm'
         other_headers = {
             'accept': 'application/json, text/javascript, */*; q=0.01',
@@ -371,9 +347,7 @@ class Marathonbet:
             return ''
 
     def is_login(self, login_cookie):
-        '''
-        判断用户是否登录成功
-        '''
+        ''' 判断用户是否登录成功 '''
         url = 'https://www.marathonbet.com/en/live/popular'
         other_headers = {
             'upgrade-insecure-requests': '1'
